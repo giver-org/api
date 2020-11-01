@@ -1,3 +1,3 @@
 # improvements
 
-- automatic endpoint validation according to openapi spec?
+- find better way of writing graphql schema than using the graphql template tag

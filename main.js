@@ -1,9 +1,6 @@
 // Create express app
-const express = require('express');
+const express = require("express");
 const app = express();
-
-// Grab placeholder models
-const model = require('./model');
 
 // Enable cors
 // Allows cross origin resource sharing, which means requests are allowed from
@@ -13,25 +10,11 @@ const model = require('./model');
 // make cross-origin requests to a cors-enabled api hosted at
 // https://api.com:3000. Cors is necessary for SPAs that are statically hosted
 // somewhere besides where their apis are.
-const cors = require('cors');
+const cors = require("cors");
 app.use(cors());
 
-// Initalized request validator generated from openapi spec
-const openapiValidator = require('openapi-validator-middleware');
-openapiValidator.init('openapi.yaml');
+// Create our apollo server and apply it's middleware to our express app.
+const apolloServer = require("./createApolloServer")();
+apolloServer.applyMiddleware({ app });
 
-app.get('/user/:id', openapiValidator.validate, (req, res) => {
-  const id = req.params.id;
-  const user = model.getUser(id);
-  res.json(user);
-});
-
-// Openapi generated validator error handler
-app.use((err, req, res, next) => {
-  if (err instanceof openapiValidator.InputValidationError) {
-    return res.status(400).json({ inputValidationErrors: err.errors });
-  }
-  next(err);
-});
-
-app.listen('3000', () => console.log('listening on localhost:3000'));
+app.listen("3000", () => console.log("Send queries or go to http://localhost:3000/graphql with your browser"));
