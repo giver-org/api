@@ -2,7 +2,7 @@
   "name": "giver-api",
   "version": "0.0.0",
   "scripts": {
-    "start": "node main.js"
+    "start": "node app/server.js"
   },
   "dependencies": {
     "apollo-server-express": "^2.19.0",
