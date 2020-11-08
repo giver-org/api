@@ -2,12 +2,15 @@
   "name": "giver-api",
   "version": "0.0.0",
   "scripts": {
-    "start": "node app/server.js"
+    "start": "nodemon app/server.js"
   },
   "dependencies": {
     "apollo-server-express": "^2.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "graphql": "^15.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
